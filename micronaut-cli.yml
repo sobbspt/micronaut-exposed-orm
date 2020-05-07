@@ -1,5 +1,5 @@
 profile: service
-defaultPackage: book
+defaultPackage: user
 ---
 testFramework: kotlintest
 sourceLanguage: kotlin

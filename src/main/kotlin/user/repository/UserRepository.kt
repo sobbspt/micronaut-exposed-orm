@@ -1,4 +1,4 @@
-package book.repository
+package user.repository
 
 
 interface UserRepository: CrudRepository<User, Int>

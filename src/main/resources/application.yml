@@ -1,6 +1,6 @@
 micronaut:
   application:
-    name: book
+    name: user
 datasources:
   default:
     url: jdbc:mariadb://localhost:3306/user_db?ssl=false

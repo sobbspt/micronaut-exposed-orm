@@ -1,7 +1,7 @@
-package book
+package user
 
-import book.repository.User
-import book.repository.UserRepository
+import user.repository.User
+import user.repository.UserRepository
 import io.micronaut.http.MediaType
 import io.micronaut.http.annotation.*
 import org.jetbrains.exposed.dao.IntEntity

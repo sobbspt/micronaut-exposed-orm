@@ -1,4 +1,4 @@
-package book.repository
+package user.repository
 
 import org.jetbrains.exposed.sql.*
 import org.jetbrains.exposed.sql.statements.UpdateBuilder

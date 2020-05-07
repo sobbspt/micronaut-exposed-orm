@@ -1,4 +1,4 @@
-package book.repository
+package user.repository
 
 import org.jetbrains.exposed.dao.id.EntityID
 import org.jetbrains.exposed.dao.id.IntIdTable

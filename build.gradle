@@ -9,7 +9,7 @@ plugins {
 
 
 version "0.1"
-group "book"
+group "user"
 
 repositories {
     mavenCentral()
@@ -63,7 +63,7 @@ dependencies {
 
 test.classpath += configurations.developmentOnly
 
-mainClassName = "book.Application"
+mainClassName = "user.Application"
 
 test {
     useJUnitPlatform()

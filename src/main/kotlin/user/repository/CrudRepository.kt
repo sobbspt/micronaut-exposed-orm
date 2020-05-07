@@ -1,4 +1,4 @@
-package book.repository
+package user.repository
 
 interface CrudRepository<T, K> {
     fun createTable()
