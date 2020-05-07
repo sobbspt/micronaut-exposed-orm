@@ -1,0 +1,10 @@
+micronaut:
+  application:
+    name: book
+datasources:
+  default:
+    url: jdbc:mariadb://localhost:3306/user_db?ssl=false
+    username: root
+    password: app
+    driverClassName: org.mariadb.jdbc.Driver
+    maximumPoolSize: 50
