@@ -1,8 +1,13 @@
 package user.repository
 
-import org.jetbrains.exposed.sql.*
+import org.jetbrains.exposed.dao.id.EntityID
+import org.jetbrains.exposed.sql.Database
+import org.jetbrains.exposed.sql.ResultRow
+import org.jetbrains.exposed.sql.SchemaUtils
+import org.jetbrains.exposed.sql.insertAndGetId
 import org.jetbrains.exposed.sql.statements.UpdateBuilder
 import org.jetbrains.exposed.sql.transactions.transaction
+import user.model.UserResponse
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -10,11 +15,13 @@ import javax.inject.Singleton
 open class UserRepositoryImpl(@Inject val db: Database) : UserRepository {
     override fun createTable() = transaction { SchemaUtils.create(Users) }
 
-    override fun create(user: User): User {
+    override fun create(user: User): UserResponse {
+        var userId: EntityID<Int>? = null
         transaction {
-            Users.insertAndGetId(toRow(user))
+            userId = Users.insertAndGetId(toRow(user))
         }
-        return user
+
+        return UserResponse(id = userId?.value, userName = user.userName, firstName = user.firstName, lastName = user.lastName)
     }
 
     override fun findAll(): Iterable<User> {
