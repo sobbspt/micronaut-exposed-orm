@@ -20,7 +20,7 @@ class UserController(private val userRepository: UserRepository) {
     }
 
     @Get("/users/{id}")
-    fun fetchAll(@QueryValue(value = "id") id: Int): UserResponse {
+    fun getById(@QueryValue(value = "id") id: Int): UserResponse {
 
         return userRepository.findById(id).toResponse()
     }
