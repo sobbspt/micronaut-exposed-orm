@@ -12,7 +12,7 @@ import user.repository.UserRepository
 class UserController(private val userRepository: UserRepository) {
     @Post("/users")
     fun add(@Body userRequest: UserRequest): UserResponse {
-        val a = userRepository.create(userRequest.toDomain())
-        return a
+
+        return userRepository.create(userRequest.toDomain())
     }
 }
