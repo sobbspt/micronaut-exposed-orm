@@ -1,13 +1,10 @@
 package user.repository
 
 import org.jetbrains.exposed.dao.id.EntityID
-import org.jetbrains.exposed.sql.Database
-import org.jetbrains.exposed.sql.SchemaUtils
-import org.jetbrains.exposed.sql.insertAndGetId
+import org.jetbrains.exposed.sql.*
 import org.jetbrains.exposed.sql.statements.UpdateBuilder
 import org.jetbrains.exposed.sql.transactions.transaction
 import user.model.User
-import user.model.UserResponse
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -24,8 +21,13 @@ open class UserRepositoryImpl(@Inject val db: Database) : UserRepository {
         return User(id = userId?.value, firstName = user.firstName, lastName = user.lastName, userName = user.userName)
     }
 
-    override fun findAll(): Iterable<User> {
-        TODO("Not yet implemented")
+    override fun findAll(): List<User> {
+        var result: List<User> = emptyList()
+        transaction {
+            result = Users.selectAll().toList().map { fromRow(it) }.toList()
+        }
+
+        return result
     }
 
     override fun deleteAll(): Int {
@@ -37,4 +39,10 @@ open class UserRepositoryImpl(@Inject val db: Database) : UserRepository {
         it[firstName] = u.firstName
         it[lastName] = u.lastName
     }
+
+    private fun fromRow(r: ResultRow) =
+            User(r[Users.id].value,
+                    r[Users.firstName],
+                    r[Users.lastName],
+                    r[Users.userName])
 }
