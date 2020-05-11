@@ -1,6 +1,6 @@
 package user.repository
 
-import user.model.UserDomain
+import user.model.User
 
 
-interface UserRepository : CrudRepository<UserDomain, Int>
+interface UserRepository : CrudRepository<User, Int>

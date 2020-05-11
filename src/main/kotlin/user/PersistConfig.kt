@@ -14,7 +14,7 @@ class PersistConfig(private val dataSource: DataSource) {
     @Bean
     @Singleton
     fun db() : Database {
-        println("AAAAAAA")
+        println("DB Connected")
         return Database.connect(dataSource)
     }
 }

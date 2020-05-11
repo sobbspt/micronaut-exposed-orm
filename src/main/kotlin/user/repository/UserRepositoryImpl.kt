@@ -6,7 +6,7 @@ import org.jetbrains.exposed.sql.SchemaUtils
 import org.jetbrains.exposed.sql.insertAndGetId
 import org.jetbrains.exposed.sql.statements.UpdateBuilder
 import org.jetbrains.exposed.sql.transactions.transaction
-import user.model.UserDomain
+import user.model.User
 import user.model.UserResponse
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -15,16 +15,16 @@ import javax.inject.Singleton
 open class UserRepositoryImpl(@Inject val db: Database) : UserRepository {
     override fun createTable() = transaction { SchemaUtils.create(Users) }
 
-    override fun create(userDomain: UserDomain): UserResponse {
+    override fun create(user: User): User {
         var userId: EntityID<Int>? = null
         transaction {
-            userId = Users.insertAndGetId(toRow(userDomain))
+            userId = Users.insertAndGetId(toRow(user))
         }
 
-        return UserResponse(id = userId?.value, userName = userDomain.userName, firstName = userDomain.firstName, lastName = userDomain.lastName)
+        return User(id = userId?.value, firstName = user.firstName, lastName = user.lastName, userName = user.userName)
     }
 
-    override fun findAll(): Iterable<UserDomain> {
+    override fun findAll(): Iterable<User> {
         TODO("Not yet implemented")
     }
 
@@ -32,7 +32,7 @@ open class UserRepositoryImpl(@Inject val db: Database) : UserRepository {
         TODO("Not yet implemented")
     }
 
-    private fun toRow(u: UserDomain): Users.(UpdateBuilder<*>) -> Unit = {
+    private fun toRow(u: User): Users.(UpdateBuilder<*>) -> Unit = {
         it[userName] = u.userName
         it[firstName] = u.firstName
         it[lastName] = u.lastName

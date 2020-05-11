@@ -12,6 +12,6 @@ class UserController(private val userRepository: UserRepository) {
     @Post("/users")
     fun add(@Body userRequest: UserRequest): UserResponse {
 
-        return userRepository.create(userRequest.toDomain())
+        return userRepository.create(userRequest.toDomain()).toResponse()
     }
 }

@@ -10,10 +10,3 @@ object Users : IntIdTable() {
     val firstName = text("first_name")
     val lastName  = text("last_name")
 }
-
-class User(id: EntityID<Int>) : IntEntity(id) {
-    companion object : IntEntityClass<User>(Users)
-    var userName  by Users.userName
-    var firstName by Users.firstName
-    var lastName  by Users.lastName
-}
