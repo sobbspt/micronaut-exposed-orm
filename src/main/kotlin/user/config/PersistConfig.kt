@@ -1,10 +1,8 @@
-package user
+package user.config
 
 import io.micronaut.context.annotation.Bean
-import io.micronaut.context.annotation.Configuration
 import io.micronaut.context.annotation.Factory
 import org.jetbrains.exposed.sql.Database
-import javax.inject.Inject
 import javax.inject.Singleton
 import javax.sql.DataSource
 
@@ -13,7 +11,7 @@ class PersistConfig(private val dataSource: DataSource) {
 
     @Bean
     @Singleton
-    fun db() : Database {
+    fun db(): Database {
         println("DB Connected")
         return Database.connect(dataSource)
     }

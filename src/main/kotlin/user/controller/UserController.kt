@@ -1,4 +1,4 @@
-package user
+package user.controller
 
 import io.micronaut.http.annotation.Body
 import io.micronaut.http.annotation.Controller
