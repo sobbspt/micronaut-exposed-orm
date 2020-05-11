@@ -34,6 +34,14 @@ open class UserRepositoryImpl(@Inject val db: Database) : UserRepository {
         TODO("Not yet implemented")
     }
 
+    override fun findById(id: Int): User {
+        val result = transaction {
+            Users.select { Users.id eq id }.first()
+        }
+
+        return fromRow(result)
+    }
+
     private fun toRow(u: User): Users.(UpdateBuilder<*>) -> Unit = {
         it[userName] = u.userName
         it[firstName] = u.firstName

@@ -1,9 +1,6 @@
 package user.controller
 
-import io.micronaut.http.annotation.Body
-import io.micronaut.http.annotation.Controller
-import io.micronaut.http.annotation.Get
-import io.micronaut.http.annotation.Post
+import io.micronaut.http.annotation.*
 import user.model.UserRequest
 import user.model.UserResponse
 import user.repository.UserRepository
@@ -20,5 +17,11 @@ class UserController(private val userRepository: UserRepository) {
     fun fetchAll(): List<UserResponse> {
 
         return userRepository.findAll().map { it.toResponse() }.toList()
+    }
+
+    @Get("/users/{id}")
+fun fetchAll(@QueryValue(value = "id") id: Int): UserResponse {
+
+        return userRepository.findById(id).toResponse()
     }
 }
