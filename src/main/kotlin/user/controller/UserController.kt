@@ -20,8 +20,8 @@ class UserController(private val userRepository: UserRepository) {
     }
 
     @Get("/users/{id}")
-    fun getById(@QueryValue(value = "id") id: Int): UserResponse {
+    fun getById(@QueryValue(value = "id") id: Int): UserResponse? {
 
-        return userRepository.findById(id).toResponse()
+        return userRepository.findById(id)?.toResponse()
     }
 }

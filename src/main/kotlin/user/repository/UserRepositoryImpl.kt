@@ -5,6 +5,7 @@ import org.jetbrains.exposed.sql.*
 import org.jetbrains.exposed.sql.statements.UpdateBuilder
 import org.jetbrains.exposed.sql.transactions.transaction
 import user.model.User
+import java.lang.Exception
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -36,8 +37,8 @@ open class UserRepositoryImpl(@Inject val db: Database) : UserRepository {
 
     override fun findById(id: Int): User {
         val result = transaction {
-            Users.select { Users.id eq id }.first()
-        }
+            Users.select { Users.id eq id }.firstOrNull()
+        } ?: throw Exception("Resource not found")
 
         return fromRow(result)
     }
@@ -48,9 +49,8 @@ open class UserRepositoryImpl(@Inject val db: Database) : UserRepository {
         it[lastName] = u.lastName
     }
 
-    private fun fromRow(r: ResultRow) =
-            User(r[Users.id].value,
-                    r[Users.firstName],
-                    r[Users.lastName],
-                    r[Users.userName])
+    private fun fromRow(r: ResultRow) = User(r[Users.id].value,
+                r[Users.firstName],
+                r[Users.lastName],
+                r[Users.userName])
 }
