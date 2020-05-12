@@ -10,7 +10,7 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-open class UserRepositoryImpl(@Inject val db: Database) : UserRepository {
+open class UserRepositoryImpl() : UserRepository {
     override fun createTable() = transaction { SchemaUtils.create(Users) }
 
     override fun create(user: User): User {
