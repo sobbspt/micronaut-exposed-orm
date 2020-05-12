@@ -29,10 +29,10 @@ class UserControllerTest(private val userRepository: UserRepository, @Client("/"
                 HttpRequest.GET<Int>("/users/1"),
                 UserResponse::class.java)
 
-        actual.id.shouldBe(mockUser.id)
-        actual.firstName.shouldBe(mockUser.firstName)
-        actual.lastName.shouldBe(mockUser.lastName)
-        actual.userName.shouldBe(mockUser.userName)
+        actual.id shouldBe mockUser.id
+        actual.firstName shouldBe mockUser.firstName
+        actual.lastName shouldBe mockUser.lastName
+        actual.userName shouldBe mockUser.userName
 
         verify(exactly = 1) { mock.findById(any()) }
     }
