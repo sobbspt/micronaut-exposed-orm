@@ -5,7 +5,6 @@ import io.micronaut.context.annotation.Context
 import io.micronaut.context.annotation.Factory
 import org.jetbrains.exposed.sql.Database
 import org.slf4j.LoggerFactory
-import javax.inject.Singleton
 import javax.sql.DataSource
 
 @Factory

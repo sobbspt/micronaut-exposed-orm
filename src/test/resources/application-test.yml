@@ -1,0 +1,8 @@
+micronaut:
+  application:
+    name: user
+datasources:
+  default:
+    url: jdbc:h2:mem:order_db
+    driverClassName: org.h2.Driver
+    maximumPoolSize: 5
