@@ -1,6 +1,8 @@
 micronaut:
   application:
     name: user
+  server:
+    context-path: /user-service
 datasources:
   default:
     url: jdbc:mariadb://localhost:3306/user_db?ssl=false

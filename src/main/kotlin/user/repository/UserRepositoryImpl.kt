@@ -50,7 +50,7 @@ open class UserRepositoryImpl() : UserRepository {
     }
 
     private fun fromRow(r: ResultRow) = User(r[Users.id].value,
+                r[Users.userName],
                 r[Users.firstName],
-                r[Users.lastName],
-                r[Users.userName])
+                r[Users.lastName])
 }

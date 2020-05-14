@@ -17,13 +17,12 @@ import user.repository.UserRepository
 import user.repository.UserRepositoryImpl
 
 @MicronautTest
-class UserControllerTest(private val userRepository: UserRepository, @Client("/") private val client: RxHttpClient) : StringSpec({
+class UserControllerIntegrationTest(private val userRepository: UserRepository, @Client("/") private val client: RxHttpClient) : StringSpec({
     "Should return single user when get by id" {
         val mockUser = User(id = 1, userName = "user name", firstName = "first name", lastName = "last name")
 
-        val mock = getMock(userRepository)
-
-        every { mock.findById(any()) } returns mockUser
+        userRepository.createTable()
+        userRepository.create(mockUser)
 
         val actual = client.toBlocking().retrieve(
                 HttpRequest.GET<Int>("/user-service/users/1"),
@@ -33,12 +32,5 @@ class UserControllerTest(private val userRepository: UserRepository, @Client("/"
         actual.firstName shouldBe mockUser.firstName
         actual.lastName shouldBe mockUser.lastName
         actual.userName shouldBe mockUser.userName
-
-        verify(exactly = 1) { mock.findById(any()) }
     }
-}) {
-    @MockBean(UserRepositoryImpl::class)
-    fun userRepository(): UserRepository {
-        return mockk()
-    }
-}
+})
